@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express'
+import { gql } from 'apollo-server-express';
 
 const typeDefs = gql`
   type Query {
@@ -40,5 +40,5 @@ const typeDefs = gql`
     estimate: Float
     author: User!
   }
-`
-export default typeDefs
+`;
+export default typeDefs;
