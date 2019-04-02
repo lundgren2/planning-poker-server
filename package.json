@@ -1,0 +1,26 @@
+{
+  "name": "planning-poker-server",
+  "version": "1.0.0",
+  "description": "A server to run planning-poker-app",
+  "main": "src/index.js",
+  "repository": "https://github.com/lundgren2/planning-poker-server",
+  "author": "Tobias Lundgren <tobias@lundgren.design>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --exec babel-node src/index.js",
+    "build": "babel src --out-dir dist",
+    "serve": "node dist/server.js"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.4.8",
+    "express": "^4.16.4",
+    "graphql": "^14.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-rc.1",
+    "@babel/core": "^7.0.0-rc.1",
+    "@babel/node": "^7.0.0-rc.1",
+    "@babel/preset-env": "^7.0.0-rc.1",
+    "nodemon": "^1.18.3"
+  }
+}
