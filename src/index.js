@@ -4,17 +4,14 @@ import mongoose from 'mongoose';
 import { ApolloServer } from 'apollo-server-express';
 import resolvers from './graphql/resolvers';
 import typeDefs from './graphql/typeDefs';
+import context from './graphql/context';
 import { MONGODB_URI, PORT } from './config';
 
 // Connect to MongoDB
-mongoose
-  .connect(MONGODB_URI, { useNewUrlParser: true })
-  .then(() => {
-    /* console.log('Connected to mongoDB') */
-  })
-  .catch(err => {
-    console.log(err.message);
-  });
+mongoose.set('useCreateIndex', true);
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true }).catch(err => {
+  console.log(err.message);
+});
 
 const server = new ApolloServer({
   typeDefs,
