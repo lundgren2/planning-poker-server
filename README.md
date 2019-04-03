@@ -2,9 +2,8 @@
 
 ## Features
 
-- GraphQL: Apollo server express
-- Babel preset: stage-2
-- Monoose
+- GraphQL: Apollo server
+- Express + Cross-Origin Resource Sharing (CORS)
+- Babel preset: @babel/preset-env
+- MongoDB: Mongoose
 - JWT + bcrypt
-- axios
-- nodemon
