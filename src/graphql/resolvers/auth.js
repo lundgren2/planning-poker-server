@@ -33,9 +33,8 @@ export const login = async (parent, args) => {
       throw new Error(error.login.noPasswordMatched);
 
     return {
-      id: user.id,
-      email: user.email,
       token: user.getJWT(),
+      user,
     };
   } catch (err) {
     throw new Error(err);
