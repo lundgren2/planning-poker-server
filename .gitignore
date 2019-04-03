@@ -23,3 +23,8 @@ node_modules/
 
 # Mac OS
 .DS_Store
+
+# Dotenv
+.env
+.env.production
+.env.development
