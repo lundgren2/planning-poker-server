@@ -1,12 +1,17 @@
 import { expect } from 'chai';
+import faker from 'faker';
 import * as api from './api';
 import * as error from '../graphql/messages';
 
 const testUser = {
-  email: 'test@test.se',
+  name: `${faker.name.firstName()} Testsson}`,
+  email: faker.internet.email(),
   password: 'test',
-  name: 'Test Testsson',
 };
+
+console.log(
+  `Start tests with email: ${testUser.email}, name: ${testUser.name}`
+);
 
 describe('type Auth:', () => {
   it('invalid email and password', async () => {
