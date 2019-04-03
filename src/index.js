@@ -17,6 +17,8 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context,
+  introspection: true,
+  playground: true,
 });
 
 // Apply apollo server middleware
