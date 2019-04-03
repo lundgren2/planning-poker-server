@@ -9,17 +9,14 @@
   "scripts": {
     "start": "nodemon --exec babel-node -r node_modules/dotenv/config src/index.js",
     "build": "babel src --out-dir dist",
-    "serve": "node dist/server.js",
+    "serve": "node dist/index.js",
     "test": "mocha --reporter=tap -r node_modules/dotenv/config -r @babel/register 'src/**/*.spec.js'",
     "lint": "eslint . --ignore-pattern node_modules/"
   },
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/runtime": "^7.4.3",
     "apollo-server-express": "^2.4.8",
     "axios": "^0.18.0",
-    "babel-cli": "^6.26.0",
     "bcrypt": "^3.0.5",
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",
@@ -35,6 +32,8 @@
     "@babel/core": "^7.0.0-rc.1",
     "@babel/node": "^7.0.0-rc.1",
     "@babel/preset-env": "^7.0.0-rc.1",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-transform-runtime": "^7.4.3",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -44,5 +43,8 @@
     "mocha": "^6.0.2",
     "nodemon": "^1.18.3",
     "prettier": "^1.16.4"
+  },
+  "engines": {
+    "node": "11.11.x"
   }
 }
