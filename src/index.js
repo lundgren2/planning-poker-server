@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
 import resolvers from './graphql/resolvers';
 import typeDefs from './graphql/typeDefs';
@@ -11,6 +12,7 @@ const server = new ApolloServer({
 
 // Apply apollo server middleware
 const app = express();
+app.use(cors());
 server.applyMiddleware({ app });
 
 app.listen({ port: PORT }, () =>
