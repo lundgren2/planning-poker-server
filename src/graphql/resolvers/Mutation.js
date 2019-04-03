@@ -16,7 +16,7 @@ const Mutation = {
   },
   deleteStory: async (parent, { id }, context) => {
     if (!context.loggedInUser) throw new ForbiddenError(error.auth.failed);
-    return Story.findByIdAndRemove(id);
+    return Story.findOneAndDelete({ _id: id });
   },
 };
 
