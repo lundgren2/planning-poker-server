@@ -17,9 +17,9 @@ const Query = {
     // if (!context.loggedInUser) throw new ForbiddenError(error.auth.failed);
     return Story.find({}).populate('author');
   },
-  story: (parent, { id }, context) => {
+  story: (parent, args, context) => {
     // if (!context.loggedInUser) throw new ForbiddenError(error.auth.failed);
-    return Story.findById(id).populate('author');
+    return Story.findById(args.id).populate('author');
   },
 };
 

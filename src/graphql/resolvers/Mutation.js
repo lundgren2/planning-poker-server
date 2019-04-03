@@ -14,6 +14,10 @@ const Mutation = {
       author: userId,
     });
   },
+  deleteStory: async (parent, { id }, context) => {
+    if (!context.loggedInUser) throw new ForbiddenError(error.auth.failed);
+    return Story.findByIdAndRemove(id);
+  },
 };
 
 export default Mutation;

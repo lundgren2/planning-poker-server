@@ -13,7 +13,7 @@ const typeDefs = gql`
     signup(email: String!, password: String!, name: String!): AuthPayload!
     login(email: String!, password: String!): AuthPayload!
     createStory(title: String!, description: String): Story!
-    deleteStory(id: ID!): Story!
+    deleteStory(id: ID!): Story
   }
 
   type Subscription {
@@ -38,7 +38,7 @@ const typeDefs = gql`
     active: Boolean
     description: String
     estimate: Float
-    author: User!
+    author: User
   }
 `;
 export default typeDefs;

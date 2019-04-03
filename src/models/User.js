@@ -22,7 +22,12 @@ const userSchema = new Schema({
     type: String,
     required: [true, 'Name required'],
   },
-  // Add stories
+  createdStories: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Story',
+    },
+  ],
 });
 
 // Do not declare methods using ES6 arrow functions
