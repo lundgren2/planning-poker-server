@@ -7,15 +7,18 @@
   "author": "Tobias Lundgren <tobias@lundgren.design>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js",
+    "start": "nodemon --exec babel-node -r node_modules/dotenv/config src/index.js",
     "build": "babel src --out-dir dist",
     "serve": "node dist/server.js",
     "lint": "eslint . --ignore-pattern node_modules/"
   },
   "dependencies": {
     "apollo-server-express": "^2.4.8",
+    "bcrypt": "^3.0.5",
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "graphql": "^14.2.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.4.21"
   },
   "devDependencies": {
