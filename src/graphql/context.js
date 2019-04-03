@@ -10,8 +10,10 @@ const context = ({ req }) => {
     const token = authorization.replace('Bearer ', '');
     const decoded = jwt.verify(token, JWT_SECRET);
 
+    // TODO: return only userId
     return {
       loggedInUser: decoded.email,
+      userId: decoded.userId,
     };
   } catch (error) {
     console.log(error);

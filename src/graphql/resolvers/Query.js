@@ -1,19 +1,25 @@
 import { AuthenticationError, ForbiddenError } from 'apollo-server-express';
-import User from '../../models/User';
+import { User, Story } from '../../models';
 import * as error from '../messages';
-import { getUserId } from './utils';
+// import { getUserId } from './utils';
 
 const Query = {
-  hello: () => 'world',
-  // stories: (parent, args, context) => context.prisma.stories(),
-  // story: (parent, { id }, context) => context.prisma.story({ id }),
+  hello: () => 'Hello World',
   users: (parent, args, context) => {
     if (!context.loggedInUser) throw new ForbiddenError(error.auth.failed);
     return User.find({});
   },
-  user: (parent, args, context) => {
+  user: (parent, { id }, context) => {
     if (!context.loggedInUser) throw new ForbiddenError(error.auth.failed);
-    return User.findById(args.id);
+    return User.findById(id);
+  },
+  stories: (parent, args, context) => {
+    // if (!context.loggedInUser) throw new ForbiddenError(error.auth.failed);
+    return Story.find({}).populate('author');
+  },
+  story: (parent, { id }, context) => {
+    // if (!context.loggedInUser) throw new ForbiddenError(error.auth.failed);
+    return Story.findById(id).populate('author');
   },
 };
 

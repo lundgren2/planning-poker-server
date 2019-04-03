@@ -12,7 +12,7 @@ const typeDefs = gql`
   type Mutation {
     signup(email: String!, password: String!, name: String!): AuthPayload!
     login(email: String!, password: String!): AuthPayload!
-    createStory(title: String, content: String): Story!
+    createStory(title: String!, description: String): Story!
     deleteStory(id: ID!): Story!
   }
 
@@ -29,13 +29,14 @@ const typeDefs = gql`
     id: ID!
     email: String!
     name: String!
+    createdStories: [Story!]
   }
 
   type Story {
     id: ID!
-    active: Boolean
     title: String!
-    content: String
+    active: Boolean
+    description: String
     estimate: Float
     author: User!
   }
