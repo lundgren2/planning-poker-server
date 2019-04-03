@@ -5,7 +5,7 @@ const typeDefs = gql`
     hello: String
     stories: [Story!]!
     story(id: ID!): Story
-    me: User
+    user(id: ID!): User
     users: [User!]!
   }
 
@@ -22,14 +22,13 @@ const typeDefs = gql`
 
   type AuthPayload {
     token: String!
-    user: User!
+    user: User
   }
 
   type User {
     id: ID!
     email: String!
     name: String!
-    stories: [Story!]!
   }
 
   type Story {

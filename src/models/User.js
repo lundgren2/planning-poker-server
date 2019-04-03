@@ -22,6 +22,7 @@ const userSchema = new Schema({
     type: String,
     required: [true, 'Name required'],
   },
+  // Add stories
 });
 
 // Do not declare methods using ES6 arrow functions
@@ -31,7 +32,7 @@ userSchema.methods.hashPassword = function hashPassword(candidatePassword) {
 
 // TODO: fix expire to 15 min
 userSchema.methods.getJWT = function getJWT() {
-  return jwt.sign({ email: this.email }, JWT_SECRET, {
+  return jwt.sign({ email: this.email, userId: this.id }, JWT_SECRET, {
     expiresIn: '1d',
   });
 };
