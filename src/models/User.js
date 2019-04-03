@@ -18,6 +18,10 @@ const userSchema = new Schema({
     type: String,
     required: [true, 'Password required'],
   },
+  name: {
+    type: String,
+    required: [true, 'Name required'],
+  },
 });
 
 // Do not declare methods using ES6 arrow functions
