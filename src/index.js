@@ -16,6 +16,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true }).catch(err => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context,
 });
 
 // Apply apollo server middleware

@@ -8,6 +8,6 @@ export const login = {
 };
 
 export const signup = {
-  invalidUsernamePassword: 'Invalid username or password provided',
-  invalidEmail: 'Invalid email adress provided',
+  invalidEmailPassword: 'Invalid Email or password provided',
+  invalidEmail: 'Email adress already exists',
 };
