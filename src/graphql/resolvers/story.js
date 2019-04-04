@@ -65,22 +65,18 @@ export default {
 
       vote.save();
 
-      Story.updateOne(
+      const updatedStory = await Story.findOneAndUpdate(
         { _id: id },
         {
           $push: {
             votes: vote,
           },
         }
-      ).then(data => {
-        console.log(vote);
-      });
-
-      return Story.findOneAndUpdate(
-        { _id: id },
-        // { $push: { votes: vote } },
-        { new: true }
       );
+
+      pubsub.publish(STORY_UPDATED, updatedStory);
+
+      return updatedStory;
     },
   },
 };

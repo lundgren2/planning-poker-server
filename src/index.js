@@ -4,7 +4,6 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import mongoose from 'mongoose';
-// import resolvers from './graphql/resolvers';
 import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
 import typeDefs from './graphql/schema';
 import context from './graphql/context';
