@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
 import typeDefs from './graphql/schema';
 import context from './graphql/context';
-import { MONGODB_URI, PORT } from './config';
+import { MONGODB_URI } from './config';
 
 const resolvers = mergeResolvers(
   fileLoader(path.join(__dirname, './graphql/resolvers'))
@@ -25,7 +25,6 @@ const server = new ApolloServer({
   context,
   introspection: true,
   playground: true,
-  tracing: true,
   subscriptions: {
     onConnect: () => console.log('Connected to websocket'),
   },
