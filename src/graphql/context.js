@@ -16,8 +16,6 @@ const context = ({ req, connection }) => {
     const token = authorization.replace('Bearer ', '');
     const decoded = jwt.verify(token, JWT_SECRET);
 
-    console.log(`token ${token}`);
-
     // TODO: return only userId
     return {
       loggedInUser: decoded.email,
