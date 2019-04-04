@@ -1,9 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, PubSub } from 'apollo-server-express';
+import http from 'http';
 import resolvers from './graphql/resolvers';
-import typeDefs from './graphql/typeDefs';
+import { typeDefs } from './graphql/schema';
 import context from './graphql/context';
 import { MONGODB_URI, PORT } from './config';
 
@@ -26,8 +27,15 @@ const app = express();
 app.use(cors());
 server.applyMiddleware({ app });
 
-app.listen({ port: PORT }, () =>
+const httpServer = http.createServer(app);
+
+httpServer.listen({ port: PORT }, () => {
   console.log(
     `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
-  )
-);
+  );
+  console.log(
+    `🚀 Subscriptions ready at ws://localhost:${PORT}${
+      server.subscriptionsPath
+    }`
+  );
+});

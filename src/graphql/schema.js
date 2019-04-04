@@ -7,6 +7,7 @@ const typeDefs = gql`
     story(id: ID!): Story
     user(id: ID!): User
     users: [User!]!
+    votes: [Vote!]
   }
 
   type Mutation {
@@ -14,10 +15,12 @@ const typeDefs = gql`
     login(email: String!, password: String!): AuthPayload!
     createStory(title: String!, description: String): Story!
     deleteStory(id: ID!): Story
+    vote(id: ID!, value: Float): Story
   }
 
   type Subscription {
-    storySubscription: Story
+    storyUpdated: Story
+    storyCreated: Story
   }
 
   type AuthPayload {
@@ -30,6 +33,7 @@ const typeDefs = gql`
     email: String!
     name: String!
     createdStories: [Story!]
+    createdVotes: [Vote!]
   }
 
   type Story {
@@ -39,6 +43,14 @@ const typeDefs = gql`
     description: String
     estimate: Float
     author: User
+    votes: [Vote]
+    fake: [Int]
+  }
+
+  type Vote {
+    storyId: String!
+    user: User
+    value: Float
   }
 `;
-export default typeDefs;
+export { typeDefs };
