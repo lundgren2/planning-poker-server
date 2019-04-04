@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import { ApolloServer, PubSub } from 'apollo-server-express';
 import http from 'http';
 import resolvers from './graphql/resolvers';
-import { typeDefs } from './graphql/schema';
+import typeDefs from './graphql/schema';
 import context from './graphql/context';
 import { MONGODB_URI, PORT } from './config';
 

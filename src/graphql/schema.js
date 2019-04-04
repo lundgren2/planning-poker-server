@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-const typeDefs = gql`
+export default gql`
   type Query {
     hello: String
     stories: [Story!]!
@@ -53,4 +53,3 @@ const typeDefs = gql`
     value: Float
   }
 `;
-export { typeDefs };
