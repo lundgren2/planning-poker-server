@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
 import typeDefs from './graphql/schema';
 import context from './graphql/context';
-import { MONGODB_URI, PORT } from './config';
+import { MONGODB_URI } from './config';
 
 const resolvers = mergeResolvers(
   fileLoader(path.join(__dirname, './graphql/resolvers'))
@@ -23,6 +23,8 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context,
+  introspection: true,
+  playground: true,
   subscriptions: {
     onConnect: () => console.log('Connected to websocket'),
   },
@@ -30,17 +32,6 @@ const server = new ApolloServer({
 
 // Apply apollo server middleware
 const app = express();
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json'
-  );
-  next();
-});
-
 app.use(cors());
 server.applyMiddleware({ app });
 
