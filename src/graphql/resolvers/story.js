@@ -1,6 +1,7 @@
 import { ForbiddenError } from 'apollo-server-express';
 import { PubSub } from 'graphql-subscriptions';
 import { Story, Vote } from '../../models';
+import * as error from '../messages';
 
 const pubsub = new PubSub();
 const STORY_UPDATED = 'STORY_UPDATED';
@@ -8,8 +9,8 @@ const STORY_UPDATED = 'STORY_UPDATED';
 export default {
   Subscription: {
     storyUpdated: {
-      resolve: () => {
-        // return story;
+      resolve: story => {
+        return story;
       },
       subscribe: () => pubsub.asyncIterator([STORY_UPDATED]),
     },
@@ -39,10 +40,13 @@ export default {
         throw Error('Story already exists');
       }
 
-      return Story.create({
+      const story = await Story.create({
         ...args,
         author: userId,
       });
+      pubsub.publish(STORY_UPDATED, story);
+
+      return story;
     },
     deleteStory: async (parent, { id }, context) => {
       if (!context.loggedInUser) throw new ForbiddenError(error.auth.failed);
