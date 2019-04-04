@@ -2,13 +2,21 @@ import { AuthenticationError } from 'apollo-server-express';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../config';
 
-const context = ({ req }) => {
+const context = ({ req, connection }) => {
+  if (connection) {
+    // https://www.apollographql.com/docs/apollo-server/features/subscriptions#context-with-subscriptions
+    // check connection for metadata
+    return connection.context;
+  }
+
   try {
     const { authorization } = req.headers;
     if (!authorization) return undefined;
 
     const token = authorization.replace('Bearer ', '');
     const decoded = jwt.verify(token, JWT_SECRET);
+
+    console.log(`token ${token}`);
 
     // TODO: return only userId
     return {

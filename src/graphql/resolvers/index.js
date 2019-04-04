@@ -1,8 +1,8 @@
 import Query from './Query';
 import Mutation from './Mutation';
+import Subscription from './Subscription';
 
 import { Story, Vote } from '../../models';
-// import Subscription from './Subscription'
 
 const resolvers = {
   User: {
@@ -15,4 +15,4 @@ const resolvers = {
     },
   },
 };
-export default { Query, Mutation, ...resolvers };
+export default { Query, Mutation, Subscription, ...resolvers };

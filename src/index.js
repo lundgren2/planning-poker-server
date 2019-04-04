@@ -1,5 +1,5 @@
 import http from 'http';
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, PubSub } from 'apollo-server-express';
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
@@ -7,6 +7,8 @@ import resolvers from './graphql/resolvers';
 import typeDefs from './graphql/schema';
 import context from './graphql/context';
 import { MONGODB_URI, PORT } from './config';
+
+const pubsub = new PubSub();
 
 // Connect to MongoDB
 mongoose.set('useCreateIndex', true);
