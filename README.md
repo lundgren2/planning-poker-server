@@ -1,5 +1,8 @@
 # Planning poker server
 
+Live url: https://planning-poker-app.herokuapp.com/
+Server endpoint: https://planning-poker-graphql.herokuapp.com/graphql
+
 ## Features
 
 - GraphQL: Apollo server w. Subscriptions
