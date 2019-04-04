@@ -1,5 +1,6 @@
 import { ForbiddenError } from 'apollo-server-express';
 import { PubSub } from 'graphql-subscriptions';
+import mongoose from 'mongoose';
 import { Story, Vote } from '../../models';
 import * as error from '../messages';
 
@@ -17,7 +18,7 @@ export default {
   },
   Story: {
     votes: (parent, args) => {
-      return Vote.find({ storyId: parent.id });
+      return Vote.find({ storyId: parent.id }).populate('user');
     },
   },
   Query: {
@@ -53,29 +54,39 @@ export default {
       return Story.findOneAndDelete({ _id: id });
     },
 
-    vote: async (parent, { id, value }, context) => {
+    vote: async (parent, { storyId, value }, context) => {
       if (!context.loggedInUser) throw new ForbiddenError(error.auth.failed);
+      const { userId } = context;
 
-      // const userThatVoted = await User.findOne({ _id: context.userId });
-      const vote = new Vote({
-        user: context.userId,
-        storyId: id,
-        value,
-      });
-
-      vote.save();
-
-      const updatedStory = await Story.findOneAndUpdate(
-        { _id: id },
-        {
-          $push: {
-            votes: vote,
-          },
-        }
+      // IMPROVE: change order to add vote if not exist else update existing
+      const userAlreadyVoted = await Vote.findOneAndUpdate(
+        { storyId, user: userId },
+        { $set: { value } }
       );
+      let updatedStory = null;
+
+      if (!userAlreadyVoted) {
+        const vote = new Vote({
+          user: userId,
+          storyId,
+          value,
+        });
+        vote.save();
+
+        updatedStory = await Story.findOneAndUpdate(
+          { _id: storyId },
+          {
+            $push: {
+              votes: vote,
+            },
+          }
+        );
+      } else {
+        // User has already voted
+        updatedStory = await Story.findOne({ _id: storyId });
+      }
 
       pubsub.publish(STORY_UPDATED, updatedStory);
-
       return updatedStory;
     },
   },

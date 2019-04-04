@@ -15,7 +15,7 @@ export default gql`
     login(email: String!, password: String!): AuthPayload!
     createStory(title: String!, description: String): Story!
     deleteStory(id: ID!): Story
-    vote(id: ID!, value: Float): Story
+    vote(storyId: ID!, value: Float): Story
   }
 
   type Subscription {
