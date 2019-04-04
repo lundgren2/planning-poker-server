@@ -1,8 +1,8 @@
+import http from 'http';
+import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import { ApolloServer, PubSub } from 'apollo-server-express';
-import http from 'http';
 import resolvers from './graphql/resolvers';
 import typeDefs from './graphql/schema';
 import context from './graphql/context';
@@ -20,6 +20,10 @@ const server = new ApolloServer({
   context,
   introspection: true,
   playground: true,
+  tracing: true,
+  subscriptions: {
+    onConnect: () => console.log('Connected to websocket'),
+  },
 });
 
 // Apply apollo server middleware
@@ -28,8 +32,9 @@ app.use(cors());
 server.applyMiddleware({ app });
 
 const httpServer = http.createServer(app);
+server.installSubscriptionHandlers(httpServer);
 
-httpServer.listen({ port: PORT }, () => {
+httpServer.listen(PORT, () => {
   console.log(
     `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
   );
