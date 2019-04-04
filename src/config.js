@@ -10,4 +10,4 @@ export const JWT_SECRET = process.env.JWT_SECRET || 'JWT_SECRET';
 
 // mongo db
 const { DBUSER, DBPASSWORD, DBURI, DBNAME } = process.env;
-export const MONGODB_URI = `mongodb://${DBUSER}:${DBPASSWORD}@${DBURI}/${DBNAME}`;
+export const MONGODB_URI = process.env.MONGODB_URI;
