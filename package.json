@@ -27,7 +27,7 @@
     "jsonwebtoken": "^8.5.1",
     "merge-graphql-schemas": "^1.5.8",
     "mongoose": "^5.7.5",
-    "validator": "^10.11.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-rc.1",
